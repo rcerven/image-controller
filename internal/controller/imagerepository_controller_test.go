@@ -58,7 +58,7 @@ var _ = Describe("Image repository controller", func() {
 			expectedImage = fmt.Sprintf("quay.io/%s/%s", quay.TestQuayOrg, expectedImageName)
 			expectedRobotAccountPrefix = strings.ReplaceAll(strings.ReplaceAll(expectedImageName, "-", "_"), "/", "_")
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 		})
 
 		It("should provision image repository", func() {
@@ -317,7 +317,7 @@ var _ = Describe("Image repository controller", func() {
 			Expect(sa.ImagePullSecrets).To(HaveLen(0))
 
 			deleteServiceAccount(types.NamespacedName{Name: buildPipelineServiceAccountName, Namespace: defaultNamespace})
-			deleteServiceAccount(types.NamespacedName{Name: KonfluxIntegrationRunnerSAName, Namespace: defaultNamespace})
+			deleteServiceAccount(types.NamespacedName{Name: NamespaceServiceAccountName, Namespace: defaultNamespace})
 
 		})
 	})
@@ -336,7 +336,7 @@ var _ = Describe("Image repository controller", func() {
 			expectedImage = fmt.Sprintf("quay.io/%s/%s", quay.TestQuayOrg, expectedImageName)
 			expectedRobotAccountPrefix = strings.ReplaceAll(strings.ReplaceAll(expectedImageName, "-", "_"), "/", "_")
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 
 			// add push secret to SA
 			sa := getServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
@@ -476,7 +476,7 @@ var _ = Describe("Image repository controller", func() {
 			Expect(sa.ImagePullSecrets).To(HaveLen(0))
 
 			deleteServiceAccount(types.NamespacedName{Name: buildPipelineServiceAccountName, Namespace: defaultNamespace})
-			deleteServiceAccount(types.NamespacedName{Name: KonfluxIntegrationRunnerSAName, Namespace: defaultNamespace})
+			deleteServiceAccount(types.NamespacedName{Name: NamespaceServiceAccountName, Namespace: defaultNamespace})
 
 		})
 	})
@@ -507,7 +507,7 @@ var _ = Describe("Image repository controller", func() {
 
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
 			createServiceAccount(defaultNamespace, componentSaName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 
 			// wait for application SA to be created
 			Eventually(func() bool {
@@ -1006,7 +1006,7 @@ var _ = Describe("Image repository controller", func() {
 			expectedImage = fmt.Sprintf("quay.io/%s/%s", quay.TestQuayOrg, expectedImageName)
 			expectedRobotAccountPrefix = strings.ReplaceAll(strings.ReplaceAll(expectedImageName, "-", "_"), "/", "_")
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 
 		})
 
@@ -1215,7 +1215,7 @@ var _ = Describe("Image repository controller", func() {
 
 		It("should clean environment", func() {
 			deleteServiceAccount(types.NamespacedName{Name: buildPipelineServiceAccountName, Namespace: defaultNamespace})
-			deleteServiceAccount(types.NamespacedName{Name: KonfluxIntegrationRunnerSAName, Namespace: defaultNamespace})
+			deleteServiceAccount(types.NamespacedName{Name: NamespaceServiceAccountName, Namespace: defaultNamespace})
 
 			deleteImageRepository(resourceKey)
 		})
@@ -1231,7 +1231,7 @@ var _ = Describe("Image repository controller", func() {
 
 		It("should prepare environment", func() {
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 
 		})
 
@@ -1553,7 +1553,7 @@ var _ = Describe("Image repository controller", func() {
 
 		It("should clean environment", func() {
 			deleteServiceAccount(types.NamespacedName{Name: buildPipelineServiceAccountName, Namespace: defaultNamespace})
-			deleteServiceAccount(types.NamespacedName{Name: KonfluxIntegrationRunnerSAName, Namespace: defaultNamespace})
+			deleteServiceAccount(types.NamespacedName{Name: NamespaceServiceAccountName, Namespace: defaultNamespace})
 		})
 	})
 
@@ -1567,7 +1567,7 @@ var _ = Describe("Image repository controller", func() {
 
 		It("should prepare environment", func() {
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 
 		})
 
@@ -1619,7 +1619,7 @@ var _ = Describe("Image repository controller", func() {
 
 		It("should clean environment", func() {
 			deleteServiceAccount(types.NamespacedName{Name: buildPipelineServiceAccountName, Namespace: defaultNamespace})
-			deleteServiceAccount(types.NamespacedName{Name: KonfluxIntegrationRunnerSAName, Namespace: defaultNamespace})
+			deleteServiceAccount(types.NamespacedName{Name: NamespaceServiceAccountName, Namespace: defaultNamespace})
 
 		})
 	})
@@ -1639,7 +1639,7 @@ var _ = Describe("Image repository controller", func() {
 			expectedRobotAccountPrefix = strings.ReplaceAll(strings.ReplaceAll(expectedImageName, "-", "_"), "/", "_")
 
 			createServiceAccount(defaultNamespace, buildPipelineServiceAccountName)
-			createServiceAccount(defaultNamespace, KonfluxIntegrationRunnerSAName)
+			createServiceAccount(defaultNamespace, NamespaceServiceAccountName)
 
 		})
 
@@ -1742,7 +1742,7 @@ var _ = Describe("Image repository controller", func() {
 
 		It("should clean environment", func() {
 			deleteServiceAccount(types.NamespacedName{Name: buildPipelineServiceAccountName, Namespace: defaultNamespace})
-			deleteServiceAccount(types.NamespacedName{Name: KonfluxIntegrationRunnerSAName, Namespace: defaultNamespace})
+			deleteServiceAccount(types.NamespacedName{Name: NamespaceServiceAccountName, Namespace: defaultNamespace})
 
 		})
 	})
