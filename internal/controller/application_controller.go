@@ -282,7 +282,7 @@ func (r *ApplicationPullSecretCreator) createApplicationPullSecret(ctx context.C
 	return nil
 }
 
-// udateServiceAccountWithApplicationPullSecret updates the ServiceAccount to include
+// updateServiceAccountWithApplicationPullSecret updates the ServiceAccount to include
 // the application pull secret as an imagePullSecret and as a Secret
 func (r *ApplicationPullSecretCreator) updateServiceAccountWithApplicationPullSecret(ctx context.Context, applicationPullSecretName string, namespace string) error {
 	log := ctrllog.FromContext(ctx)

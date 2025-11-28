@@ -156,7 +156,12 @@ func (r *ComponentReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 	}
 
 	if imageRepositoryFound == "" {
-		imageRepositoryName := fmt.Sprintf("imagerepository-for-%s-%s", component.Spec.Application, component.Name)
+		imageRepositoryName := ""
+		if component.Spec.Application != "" {
+			imageRepositoryName = fmt.Sprintf("imagerepository-for-%s-%s", component.Spec.Application, component.Name)
+		} else {
+			imageRepositoryName = fmt.Sprintf("imagerepository-for-%s", component.Name)
+		}
 		log.Info("Will create image repository", "ImageRepositoryName", imageRepositoryName, "ComponentName", component.Name)
 
 		imageRepository := &imagerepositoryv1alpha1.ImageRepository{
@@ -168,7 +173,6 @@ func (r *ComponentReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 				Name:      imageRepositoryName,
 				Namespace: component.Namespace,
 				Labels: map[string]string{
-					ApplicationNameLabelName: component.Spec.Application,
 					ComponentNameLabelName:   component.Name,
 				},
 				Annotations: map[string]string{
@@ -180,6 +184,10 @@ func (r *ComponentReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 					Visibility: imagerepositoryv1alpha1.ImageVisibility(requestRepositoryOpts.Visibility),
 				},
 			},
+		}
+
+		if component.Spec.Application != "" {
+			imageRepository.ObjectMeta.Labels[ApplicationNameLabelName] = component.Spec.Application
 		}
 
 		if err := r.Client.Create(ctx, imageRepository); err != nil {
